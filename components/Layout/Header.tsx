@@ -82,7 +82,7 @@ const Header: React.FC = () => {
             </LinkScroll>
           </ul>
           <div className="col-start-10 col-end-12 font-medium flex justify-end items-center">
-            <ButtonOutline>Let's get started!</ButtonOutline>
+            <ButtonOutline href="/hire-us">Let's get started!</ButtonOutline>
           </div>
         </nav>
       </header>
