@@ -1,5 +1,5 @@
 import Image from "next/image"
-import React, { useMemo } from "react"
+import React, { useMemo, useState } from "react"
 import { motion } from "framer-motion"
 import getScrollAnimation from "../utils/getScrollAnimation"
 import ScrollAnimationWrapper from "./Layout/ScrollAnimationWrapper"
@@ -8,6 +8,23 @@ import Link from "next/link"
 
 const Form: React.FC = () => {
   const scrollAnimation = useMemo(() => getScrollAnimation(), [])
+  const [formData, setFormData] = useState({
+    companyName: "",
+    name: "",
+    email: "",
+    phone: "",
+  })
+
+  const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = event.currentTarget
+    setFormData({ ...formData, [name]: value })
+  }
+
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    console.log(formData)
+  }
+
   return (
     <div
       className="max-w-screen-xl mt-8 mb-6 sm:mt-14 sm:mb-14 px-6 sm:px-8 lg:px-16 mx-auto"
@@ -32,8 +49,10 @@ const Form: React.FC = () => {
                   <input
                     type="text"
                     id="company-name"
-                    name="company-name"
+                    name="companyName"
                     className="block w-full mt-1 rounded-lg border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2 p-1"
+                    value={formData.companyName}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="my-2">
@@ -45,6 +64,8 @@ const Form: React.FC = () => {
                     id="name"
                     name="name"
                     className="block w-full mt-1 rounded-lg border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2 p-1"
+                    value={formData.name}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="my-2">
@@ -56,6 +77,8 @@ const Form: React.FC = () => {
                     id="email"
                     name="email"
                     className="block w-full mt-1 rounded-lg border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2 p-1"
+                    value={formData.email}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="my-2">
@@ -67,10 +90,15 @@ const Form: React.FC = () => {
                     id="phone"
                     name="phone"
                     className="block w-full mt-1 rounded-lg border focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 pl-2 p-1"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="my-4">
-                  <button className="font-medium tracking-wide py-2 px-5 sm:px-8 border border-orange-500 text-orange-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-orange-500 hover:text-white-500 transition-all hover:shadow-orange ">
+                  <button
+                    className="font-medium tracking-wide py-2 px-5 sm:px-8 border border-orange-500 text-orange-500 bg-white-500 outline-none rounded-l-full rounded-r-full capitalize hover:bg-orange-500 hover:text-white-500 transition-all hover:shadow-orange"
+                    onClick={handleSubmit}
+                  >
                     Submit
                   </button>
                 </div>
