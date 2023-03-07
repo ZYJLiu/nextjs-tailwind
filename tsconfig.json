@@ -18,6 +18,16 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/Layout/Footer.tsx",
+    "components/Layout/Header.tsx",
+    "components/Layout/Layout.tsx",
+    "components/Layout/ScrollAnimationWrapper.js",
+    "components/misc/ButtonPrimary.tsx",
+    "components/misc/ButtonOutline.tsx"
+  ],
   "exclude": ["node_modules"]
 }
