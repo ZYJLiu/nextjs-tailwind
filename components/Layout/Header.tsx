@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 // Import react scroll
 import { Link as LinkScroll } from "react-scroll"
@@ -8,14 +8,29 @@ import Logo from "../../public/assets/Logo.svg"
 const Header: React.FC = () => {
   const [activeLink, setActiveLink] = useState("")
   const [scrollActive, setScrollActive] = useState(false)
+  const headerRef = useRef(null)
+  const [headerHeight, setHeaderHeight] = useState(0)
+  console.log(headerHeight)
   useEffect(() => {
     window.addEventListener("scroll", () => {
       setScrollActive(window.scrollY > 20)
     })
   }, [])
+
+  useEffect(() => {
+    if (headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight
+      // pass header height to Layout component
+      // assuming that you are using the Layout component in this component
+      // you can also pass it to a higher-level component if needed
+      setHeaderHeight(headerHeight)
+    }
+  }, [])
+
   return (
     <>
       <header
+        ref={headerRef}
         className={
           "fixed top-0 w-full  z-30 bg-white-500 transition-all " +
           (scrollActive ? " shadow-md pt-0" : " pt-4")
@@ -32,6 +47,7 @@ const Header: React.FC = () => {
               spy={true}
               smooth={true}
               duration={1000}
+              offset={-headerHeight}
               onSetActive={() => {
                 setActiveLink("about")
               }}
@@ -50,6 +66,7 @@ const Header: React.FC = () => {
               spy={true}
               smooth={true}
               duration={1000}
+              offset={-headerHeight}
               onSetActive={() => {
                 setActiveLink("feature")
               }}
@@ -68,6 +85,7 @@ const Header: React.FC = () => {
               spy={true}
               smooth={true}
               duration={1000}
+              offset={-headerHeight}
               onSetActive={() => {
                 setActiveLink("pricing")
               }}
