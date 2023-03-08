@@ -8,7 +8,7 @@ import Logo from "../../public/assets/Logo.svg"
 const Header: React.FC = () => {
   const [activeLink, setActiveLink] = useState("")
   const [scrollActive, setScrollActive] = useState(false)
-  const headerRef = useRef(null)
+  const headerRef = useRef<HTMLDivElement>(null)
   const [headerHeight, setHeaderHeight] = useState(0)
   console.log(headerHeight)
   useEffect(() => {
@@ -20,9 +20,7 @@ const Header: React.FC = () => {
   useEffect(() => {
     if (headerRef.current) {
       const headerHeight = headerRef.current.offsetHeight
-      // pass header height to Layout component
-      // assuming that you are using the Layout component in this component
-      // you can also pass it to a higher-level component if needed
+
       setHeaderHeight(headerHeight)
     }
   }, [])
